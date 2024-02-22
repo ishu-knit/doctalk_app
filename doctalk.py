@@ -113,8 +113,9 @@ def main():
 
         # Download embeddings from OpenAI
         
-        key = st.secrets["OPENAI_API_KEY"]
-        st.warning("key---->>>>>>>>>>...",key)
+        OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+        
+        # st.warning("key---->>>>>>>>>>...",key)
         
 
         try:
