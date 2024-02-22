@@ -78,11 +78,9 @@
 
 
 
-
-
+# 
 
 import streamlit as st
-import os 
 from PyPDF2 import PdfReader
 from langchain_openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
@@ -112,32 +110,44 @@ def main():
         )
         texts = text_splitter.split_text(raw_text)
 
-        # Download embeddings from OpenAI
-        
-        # os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"]
-        os.environ['OPENAI_API_KEY'] =  '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'
-
-        # OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
-        
-        # st.warning("key---->>>>>>>>>>...",key)
-        
-
+        # Fetching API key
         try:
-            embeddings = OpenAIEmbeddings()
+            api_key = st.secrets["OPENAI_API_KEY"]
+        except KeyError:
+            st.warning("OpenAI API key not found in secrets.")
+            st.stop()
+
+        # Initializing OpenAI Embeddings
+        try:
+            embeddings = OpenAIEmbeddings(api_key=api_key)
+        except Exception as e:
+            st.warning(f"Failed to initialize OpenAI embeddings: {str(e)}")
+            st.stop()
+
+        # Building FAISS index
+        try:
             docsearch = FAISS.from_texts(texts, embeddings)
+        except Exception as e:
+            st.warning(f"Failed to build FAISS index: {str(e)}")
+            st.stop()
 
-            chain = load_qa_chain(OpenAI(), chain_type="stuff")
+        # Loading question answering chain
+        try:
+            chain = load_qa_chain(OpenAI(api_key=api_key), chain_type="stuff")
+        except Exception as e:
+            st.warning(f"Failed to load question answering chain: {str(e)}")
+            st.stop()
 
-            query = st.text_input('Type your query here... then press enter')
+        # User query input
+        query = st.text_input('Type your query here... then press enter')
 
-            if query:
+        if query:
+            # Performing search and question answering
+            try:
                 docs = docsearch.similarity_search(query)
                 result = chain.run(input_documents=docs, question=query)
                 st.write(result)
-
-        except :
-            st.warning("Openai api key may  reach its limit  or comsumed all its credit !!")
-            st.warning("Use differnet Openai api key to fix error")
-
+            except Exception as e:
+                st.warning(f"Failed to perform search and question answering: {str(e)}")
 
 main()
