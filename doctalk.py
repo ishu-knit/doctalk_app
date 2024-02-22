@@ -116,7 +116,7 @@ def main():
         
         # os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"]
 
-        openai.api_key = st.secrets["OPENAI_API_KEY"]
+        OPENAI.api_key = st.secrets["OPENAI_API_KEY"]
         
         # st.warning("key---->>>>>>>>>>...",key)
         
