@@ -4,3 +4,4 @@ PyPDF2
 supabase
 streamlit
 langchain_openai
+dotenv
