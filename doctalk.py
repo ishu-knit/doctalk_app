@@ -82,6 +82,7 @@
 
 
 import streamlit as st
+import os 
 from PyPDF2 import PdfReader
 from langchain_openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
@@ -113,7 +114,7 @@ def main():
 
         # Download embeddings from OpenAI
         
-        OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+        os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"]
         
         # st.warning("key---->>>>>>>>>>...",key)
         
