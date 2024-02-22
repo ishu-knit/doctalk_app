@@ -4,4 +4,5 @@ PyPDF2
 supabase
 streamlit
 langchain_openai
-FAISS
+
+langchain_community.vectorstores
