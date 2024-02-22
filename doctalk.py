@@ -115,8 +115,9 @@ def main():
         # Download embeddings from OpenAI
         
         # os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"]
+        os.environ['OPENAI_API_KEY'] =  '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'
 
-        OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+        # OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
         
         # st.warning("key---->>>>>>>>>>...",key)
         
