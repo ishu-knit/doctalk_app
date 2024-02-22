@@ -1,0 +1,1 @@
+i need to add faiss-cpu in my requirements.txt dont know why , because it can  take  fasiss from langchain.vectorstore   but it dont  ---------->> find this reason 
