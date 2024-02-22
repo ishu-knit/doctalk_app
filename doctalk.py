@@ -113,8 +113,8 @@ def main():
 
         # Download embeddings from OpenAI
         
-        # key = "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"
-        # st.secrets["OPENAI_API_KEY"]
+        key = st.secrets["OPENAI_API_KEY"]
+        print("key---->>>>>>>>>>...",key)
         
 
         try:
